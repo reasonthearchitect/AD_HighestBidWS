@@ -1,0 +1,8 @@
+{
+  "generator-spring-rest": {
+    "baseName": "highestbid",
+    "packageName": "com.rta.highestbid",
+    "packageNameGenerated": "com.rta.highestbid.generated",
+    "adddocker": "yes"
+  }
+}

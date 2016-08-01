@@ -1,0 +1,28 @@
+---
+resources:
+- name: resource-highestbid
+  type: git
+  source:
+    uri: https://github.com/reasonthearchitect/AD_HighestBidWS.git
+    branch: master
+
+- name: highestbid-docker-image
+  type: docker-image
+  source:
+    repository: {{docker-hub-image-name}}
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-api-key}}
+
+jobs:
+- name: job-build-docker
+  public: true
+  serial: true
+  plan:
+    - get: resource-highestbid
+      trigger: true
+    - task: job-build
+      file: resource-highestbid/ci/tasks/package.yml
+    - put: highestbid-docker-image
+      params:
+        build: resource-jar
