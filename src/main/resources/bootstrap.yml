@@ -1,0 +1,25 @@
+server:
+  port: 8230
+
+---
+spring:
+  profiles:
+    active: dev
+  application:
+    name: highestbid
+  cloud:
+    config:
+      enabled: false
+
+---
+server:
+  port: 8230
+spring:
+  profiles:
+    active: prod
+  application:
+    name: highestbid
+  cloud:
+    config:
+      enabled: true
+      uri: http://config.reasonthearchitect.com
