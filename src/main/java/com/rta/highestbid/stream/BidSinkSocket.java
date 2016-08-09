@@ -29,10 +29,11 @@ public class BidSinkSocket {
     }
 
     public void sendToClients(Bid bid) {
-        String json = "";
         try {
-            json = this.mapper.writeValueAsString(bid);
-        } catch (Exception ex) {ex.printStackTrace();}
-        messagingTemplate.convertAndSend("/topic/newbid", json);
+            String json = this.mapper.writeValueAsString(bid);
+            messagingTemplate.convertAndSend("/topic/newbid", json);
+        } catch (Exception ex) {
+            log.error("Error marshalling the JSON", ex);
+        }
     }
 }
